@@ -1,4 +1,3 @@
-```tsx
 import {
   createFileRoute,
   Link,
@@ -118,4 +117,3 @@ function AdminLayout() {
     </div>
   );
 }
-```
