@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -88,7 +90,16 @@ export function AdminStoreProvider({ children }: { children: ReactNode }) {
       removeProducts: (ids) => removeMut.mutate(ids),
       setOrderStatus: (id, status) => statusMut.mutate({ id, status }),
     }),
-    [productsQ.data, ordersQ.data, productsQ.isLoading, ordersQ.isLoading],
+    [
+      productsQ.data,
+      ordersQ.data,
+      productsQ.isLoading,
+      ordersQ.isLoading,
+      addMut,
+      updateMut,
+      removeMut,
+      statusMut,
+    ],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
