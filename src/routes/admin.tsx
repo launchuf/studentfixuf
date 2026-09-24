@@ -1,3 +1,4 @@
+```tsx
 import {
   createFileRoute,
   Link,
@@ -6,10 +7,18 @@ import {
   useNavigate,
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { AdminStoreProvider } from "@/lib/admin-store";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/admin")({
   component: RequireAdmin,
+  head: () => ({
+    meta: [
+      {
+        title: "Admin Dashboard | Studentfix",
+      },
+    ],
+  }),
 });
 
 function RequireAdmin() {
@@ -59,7 +68,11 @@ function RequireAdmin() {
     );
   }
 
-  return <AdminLayout />;
+  return (
+    <AdminStoreProvider>
+      <AdminLayout />
+    </AdminStoreProvider>
+  );
 }
 
 function AdminLayout() {
@@ -71,7 +84,10 @@ function AdminLayout() {
             Studentfix Admin
           </Link>
 
-          <nav className="flex items-center gap-4 text-sm">
+          <nav
+            aria-label="Admin navigation"
+            className="flex items-center gap-4 text-sm"
+          >
             <Link
               to="/admin"
               className="text-muted-foreground hover:text-foreground"
@@ -102,3 +118,4 @@ function AdminLayout() {
     </div>
   );
 }
+```
