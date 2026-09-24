@@ -1,4 +1,3 @@
-```tsx
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   TrendingUp,
@@ -31,6 +30,13 @@ import {
 
 export const Route = createFileRoute("/admin/")({
   component: Dashboard,
+  head: () => ({
+    meta: [
+      {
+        title: "Admin Dashboard | Studentfix",
+      },
+    ],
+  }),
 });
 
 function Dashboard() {
@@ -63,7 +69,7 @@ function Dashboard() {
   const low = products.filter((p) => p.stock <= 8);
 
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <div className="flex items-end justify-between">
         <div>
           <h1 className="font-display text-2xl font-bold">Översikt</h1>
@@ -153,18 +159,9 @@ function Dashboard() {
                     x2="1"
                     y2="0"
                   >
-                    <stop
-                      offset="0%"
-                      stopColor="var(--violet)"
-                    />
-                    <stop
-                      offset="60%"
-                      stopColor="var(--electric)"
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor="var(--gold)"
-                    />
+                    <stop offset="0%" stopColor="var(--violet)" />
+                    <stop offset="60%" stopColor="var(--electric)" />
+                    <stop offset="100%" stopColor="var(--gold)" />
                   </linearGradient>
                 </defs>
 
@@ -200,10 +197,7 @@ function Dashboard() {
                   labelStyle={{
                     color: "var(--muted-foreground)",
                   }}
-                  formatter={(v: number) => [
-                    formatSEK(v),
-                    "Försäljning",
-                  ]}
+                  formatter={(v: number) => [formatSEK(v), "Försäljning"]}
                 />
 
                 <Area
@@ -231,10 +225,7 @@ function Dashboard() {
         >
           <ul className="space-y-3">
             {top.map((p, i) => (
-              <li
-                key={p.id}
-                className="flex items-center gap-3"
-              >
+              <li key={p.id} className="flex items-center gap-3">
                 <span className="w-4 font-display text-xs font-bold text-muted-foreground">
                   {i + 1}
                 </span>
@@ -249,9 +240,7 @@ function Dashboard() {
                 />
 
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium">
-                    {p.name}
-                  </p>
+                  <p className="truncate font-medium">{p.name}</p>
 
                   <div className="mt-1 h-1 rounded-full bg-muted">
                     <div
@@ -265,9 +254,7 @@ function Dashboard() {
                   </div>
                 </div>
 
-                <span className="text-xs font-semibold">
-                  {p.sold} st
-                </span>
+                <span className="text-xs font-semibold">{p.sold} st</span>
               </li>
             ))}
           </ul>
@@ -294,26 +281,19 @@ function Dashboard() {
                 <TableHead>Kund</TableHead>
                 <TableHead>Belopp</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">
-                  Datum
-                </TableHead>
+                <TableHead className="text-right">Datum</TableHead>
               </TableRow>
             </TableHeader>
 
             <TableBody>
               {orders.slice(0, 7).map((o) => (
-                <TableRow
-                  key={o.id}
-                  className="border-border"
-                >
+                <TableRow key={o.id} className="border-border">
                   <TableCell className="font-mono text-xs">
                     {o.id}
                   </TableCell>
 
                   <TableCell>
-                    <p className="font-medium">
-                      {o.customer.name}
-                    </p>
+                    <p className="font-medium">{o.customer.name}</p>
 
                     <p className="text-xs text-muted-foreground">
                       {o.customer.email}
@@ -329,9 +309,7 @@ function Dashboard() {
                   </TableCell>
 
                   <TableCell className="text-right text-muted-foreground">
-                    {new Date(o.date).toLocaleDateString(
-                      "sv-SE"
-                    )}
+                    {new Date(o.date).toLocaleDateString("sv-SE")}
                   </TableCell>
                 </TableRow>
               ))}
@@ -355,9 +333,7 @@ function Dashboard() {
                 className="flex items-center justify-between rounded-lg border border-warning/20 bg-warning/5 px-3 py-2"
               >
                 <div className="min-w-0">
-                  <p className="truncate font-medium">
-                    {p.name}
-                  </p>
+                  <p className="truncate font-medium">{p.name}</p>
 
                   <p className="text-xs text-muted-foreground">
                     {p.category}
@@ -366,9 +342,7 @@ function Dashboard() {
 
                 <span
                   className={`font-display text-lg font-bold ${
-                    p.stock === 0
-                      ? "text-destructive"
-                      : "text-warning"
+                    p.stock === 0 ? "text-destructive" : "text-warning"
                   }`}
                 >
                   {p.stock}
@@ -378,7 +352,7 @@ function Dashboard() {
           </ul>
         </Card>
       </div>
-    </main>
+    </div>
   );
 }
 
@@ -425,10 +399,7 @@ function Kpi({
         {value}
       </p>
 
-      <p className={`mt-1 text-xs font-semibold ${text}`}>
-        {delta}
-      </p>
+      <p className={`mt-1 text-xs font-semibold ${text}`}>{delta}</p>
     </div>
   );
 }
-```
